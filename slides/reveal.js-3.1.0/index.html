@@ -54,23 +54,95 @@
                 * orientée fonctions
                 * les fonctions sont des paramètres comme les autres
                 * code plus dynamique et réutilisable
-                * exemple marquant du **Javascript**
+                * language très fonctionnels : **Javascript, Groovy, Scala …**
                 * en Java, programmation objet. Mais …
             </script>
         </section>
 
-        <!-- Example of nested vertical slides -->
+        <section data-markdown>
+            <script type="text/template">
+                ## En JavaScript
+
+                Les fonctions sont des objets de première classe :
+
+                <pre><code class="javascript" data-trim contenteditable>
+var callback = function() {
+...
+}
+                </code></pre>
+
+                <pre><code class="javascript" data-trim contenteditable>
+window.setInterval(function(){
+    ...
+},1000)
+                </code></pre>
+            </script>
+        </section>
+
+
         <section data-markdown>
             <script type="text/template">
                 ## En Java
 
-                Programmation fonctionnelle existante depuis longtemps. Classes anonymes ou non, en utilisant des **interfaces**.
+                Programmation fonctionnelle existante depuis longtemps.
+
+                Classes anonymes ou non, en utilisant des **interfaces**.
 
                 <pre><code class="java" data-trim contenteditable>
-Collections.sort(objs, new Comparator() { ... });
+Collections.sort(users, new Comparator() {
+    public int compare(Object o1, Object o2) {
+        ...
+    }
+});
+                </code></pre>
+
+                <pre><code class="java" data-trim contenteditable>
+new Thread(new Runnable() {
+    public void run() {
+        ...
+    }
+}).start();
                 </code></pre>
             </script>
         </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Guava
+
+                Enorme boite à outils du language
+
+                similaire à Underscore (js), Apache Commons (java)
+
+                Étant les fonctionnalités des collections, des I/O, de caching, de concurrence …
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Les Fonctions
+
+                Interfaces génériques de base multi-usage
+
+                * Function : une entrée, une sortie
+                * Supplier : pas d'entrée, une sortie
+                * Predicate : une entrée, une sortie boolean
+                *
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Les collections
+
+                * Iterables
+                * Lists
+                * Collections2
+                *
+            </script>
+        </section>
+
+
         <section>
             <h2>Basement Level 1</h2>
 
