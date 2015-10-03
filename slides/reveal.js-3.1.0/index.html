@@ -110,11 +110,10 @@ new Thread(new Runnable() {
             <script type="text/template">
                 ## Guava
 
-                Enorme boite à outils du language
-
-                similaire à Underscore (js), Apache Commons (java)
-
-                Étant les fonctionnalités des collections, des I/O, de caching, de concurrence …
+                * Enorme boite à outils du language
+                * similaire à Underscore (js), Apache Commons (java)
+                * Étend les fonctionnalités des collections, des I/O, de caching, de concurrence …
+                * **Ne remplace pas** les outils JAVA existants
             </script>
         </section>
 
@@ -127,7 +126,6 @@ new Thread(new Runnable() {
                 * Function : une entrée, une sortie
                 * Supplier : pas d'entrée, une sortie
                 * Predicate : une entrée, une sortie boolean
-                *
             </script>
         </section>
 
@@ -138,7 +136,56 @@ new Thread(new Runnable() {
                 * Iterables
                 * Lists
                 * Collections2
-                *
+                * Sets
+                * Maps
+                * Tables
+                * **Pas de Arrays**
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Live coding : Filtres
+
+                Filtrer les nombres paires
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Live coding : Transformers
+
+                Transformer des objets en d'autres objets
+
+                <img src="img/transformers.gif"/>
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Lazy Collections
+
+                <img src="img/lazy.gif"/>
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Live coding : enchainer
+
+                Filtrer les nombres paires et construire un chaine de caractères.
+
+                <img src="img/chain.gif"/>
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Optional : valeur absente
+
+                * Wrapper sur des objets
+                * Différencier les cas de «non-trouvé» des cas de «valeur absente».
+                * Mieux localiser l'exception
             </script>
         </section>
 
