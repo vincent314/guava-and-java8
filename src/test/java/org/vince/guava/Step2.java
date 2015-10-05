@@ -3,9 +3,6 @@ package org.vince.guava;
 import org.junit.Assert;
 import org.junit.Test;
 
-/**
- * Created by vincent on 01/10/15.
- */
 public class Step2 {
 
     interface CustomInterface{

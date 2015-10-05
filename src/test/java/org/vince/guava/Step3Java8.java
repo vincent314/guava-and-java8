@@ -1,23 +1,16 @@
 package org.vince.guava;
 
-import com.google.common.collect.Iterables;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.IntPredicate;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
-/**
- * Created by vincent on 01/10/15.
- */
 public class Step3Java8 {
 
     @Test
@@ -25,15 +18,11 @@ public class Step3Java8 {
         int[] values = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
         // Conserver les nombres pairs
-        IntStream result = Arrays.stream(values)
+        int[] result = Arrays.stream(values)
             .filter((i) -> i % 2 == 0)
-            .collect(Collectors::toList);
+            .toArray();
 
-        assertTrue(
-            Iterables.elementsEqual(
-                Arrays.asList(2, 4, 6, 8, 10),
-                result
-            ));
+        assertArrayEquals(new int[]{2, 4, 6, 8, 10}, result);
     }
 
     class User {
@@ -52,42 +41,34 @@ public class Step3Java8 {
 
     @Test
     public void testTransform() {
-        List<String> values = Arrays.asList("Ghislaine", "Catherine");
+        List<String> prenoms = Arrays.asList("Ghislaine", "Catherine");
 
-        List<User> result = Lists.transform(values, new Function<String, User>() {
-
-            @Override
-            public User apply(String prenom) {
+        List<User> users = prenoms.stream()
+            .map((prenom) -> {
                 System.out.println("Traitement de " + prenom);
                 return new User(prenom);
-            }
-        });
+            })
+            .collect(Collectors.toList());
 
         // result est une collection lazy
-        System.out.println("LAZY COLLECTION !!!");
+        System.out.println("COLLECTION NOT LAZY");
 
-        assertTrue(
-            Iterables.elementsEqual(
-                Arrays.asList(
-                    new User("Ghislaine"),
-                    new User("Catherine")
-                ),
-                result
-            ));
+        Assert.assertArrayEquals(
+            new User[]{
+                new User("Ghislaine"),
+                new User("Catherine")
+            },
+            users.toArray()
+        );
     }
 
     @Test
     public void testChain() {
         Integer[] values = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-
-        String result = FluentIterable.of(values)
-            .filter(new Predicate<Integer>() {
-                @Override
-                public boolean apply(Integer i) {
-                    return i % 2 == 0;
-                }
-            })
-            .join(Joiner.on(";"));
+        String result = Stream.of(values)
+            .filter((i) -> i % 2 == 0)
+            .map((i) -> Integer.toString(i))
+            .collect(Collectors.joining(";"));
 
         assertEquals("2;4;6;8;10", result);
     }
