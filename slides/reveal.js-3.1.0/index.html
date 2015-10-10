@@ -122,13 +122,15 @@ new Thread(new Runnable() {
 
         <section data-markdown>
             <script type="text/template">
-                ## Guava
+                ## Pourquoi utiliser Guava dès maintenant ?
 
                 <ul>
-                <li class="fragment">Boite à outils du language Java par Google</li>
-                <li class="fragment">similaire à Underscore/lodash (js), Apache Commons (java)</li>
-                <li class="fragment">Étend les fonctionnalités des collections, des I/O, de caching, de concurrence …</li>
-                <li class="fragment">**Ne remplace pas** les outils JAVA existants</li>
+                    <li class="fragment">Boite à outils du language Java par Google</li>
+                    <li class="fragment">similaire à Underscore/lodash (js), Apache Commons (java)</li>
+                    <li class="fragment">Étend les fonctionnalités des collections, des I/O, de caching, de concurrence
+                        …
+                    </li>
+                    <li class="fragment">**Ne remplace pas** les outils JAVA existants</li>
                 </ul>
             </script>
         </section>
@@ -218,9 +220,11 @@ new Thread(new Runnable() {
                 ## Fichier dictionnaire source
 
                 Principe Générale
+
                 <img src="img/Concept.png"/>
 
                 Fichier source XML
+
                 <img src="img/XML.png"/>
 
 
@@ -264,6 +268,57 @@ new Thread(new Runnable() {
                     <li class="fragment">Streams et parallélisme</li>
                     <li class="fragment">Nouvelle API Date-Time</li>
                 </ul>
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## lambda expressions
+
+                Sucre syntaxique. Soit le code suivant :
+
+                <pre><code class="java" data-trim contenteditable>
+Function&lt;String,String> toUpper = new Function&lt;String,String>(){
+    @Override
+    public String apply(String source) {
+        return source.toUpperCase();
+    }
+};
+                </code></pre>
+
+                <div class="fragment">
+                    Devient en λ, grâce à l'**inférence de type** :
+
+                <pre><code class="java" data-trim contenteditable>
+Function&lt;String, String> toUpper =
+    (source) -> source.toUpperCase();
+                </code></pre>
+
+                </div>
+
+                <div class="fragment">
+                    ou encore, dans ce cas simple :
+
+                <pre><code class="java" data-trim contenteditable>
+Function&lt;String, String> toUpper = String::toUpperCase;
+                </code></pre>
+                </div>
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Questions
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Fin
+
+                Télécharger les sources sur [https://github.com/vincent314/guava-and-java8](https://github.com/vincent314/guava-and-java8)
+
+                Pour aller plus loin sur les λ, lire **«Java Closures and Lambda» de Robert Fischer** (ISBN13: 978-1-4302-5998-5)
             </script>
         </section>
     </div>
