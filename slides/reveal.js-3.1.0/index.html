@@ -207,11 +207,13 @@ new Thread(new Runnable() {
 
         <section data-markdown>
             <script type="text/template">
-                ## Exemple : Inverser un dictionnaire des Kanji (charactères Japonais)
+                ## Exemple : Inverser un dictionnaire de Kanji (charactères Japonais)
 
-                **文** : sentence, literature, style, art, decoration, figures, plan
+                <div class="fragment">
+                    **文** : sentence, literature, style, art, decoration, figures, plan
 
-                **sentence** : 句, 刑, 処, 文
+                    **sentence** : 句, 刑, 処, 文
+                </div>
             </script>
         </section>
 
@@ -268,6 +270,36 @@ new Thread(new Runnable() {
                     <li class="fragment">Streams et parallélisme</li>
                     <li class="fragment">Nouvelle API Date-Time</li>
                 </ul>
+            </script>
+        </section>
+
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Les interfaces fonctionnelles 1/2
+
+                ~43 interfaces annotées **@FunctionalInterface**
+
+                1 méthode par interface (non «default»)
+
+                possibilité de définir ses propres interfaces fonctionnelles
+
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Les interfaces fonctionnelles 2/2
+
+                * Function&lt;T,R> : Une entrée, une sortie
+                * Consumer&lt;T> : Une entrée, pas de sortie
+                * Supplier&lt;T> : Pas d'entrée, une sortie
+                * Predicate&lt;T> : Une entrée, une sortie boolean
+                * UnaryOperator&lt;T> : une entrée, une sortie de même type
+                * BinaryOperator&lt;T> : deux entrées, une sortie, tous de même type
+                * BiFunction, BiConsumer … : deux entrées
+                * +Dérivés pour les types primitifs
+
             </script>
         </section>
 
