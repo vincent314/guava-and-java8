@@ -197,23 +197,41 @@ new Thread(new Runnable() {
 
         <section data-markdown>
             <script type="text/template">
-                ## Live coding : multimaps
+                ## Live coding : multimaps*
 
-                Multimap = une map qui associe à clé N valeurs
+                multimap* : une map qui associe à une clé N valeurs
 
-                Exemple : Inverser le sens d'un dictionnaire
-            </script>
-        </section>
+                ### Exemple : Inverser le sens d'un dictionnaire
 
-        <section data-markdown>
-            <script type="text/template">
-                ## Exemple : Inverser un dictionnaire de Kanji (charactères Japonais)
 
-                <div class="fragment">
-                    **文** : sentence, literature, style, art, decoration, figures, plan
-
-                    **sentence** : 句, 刑, 処, 文
-                </div>
+                <table>
+                    <tbody>
+                    <tr>
+                        <td>
+                            AVANT
+                        </td>
+                        <td>
+                            APRÈS
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            clé = 文
+                        </td>
+                        <td>
+                            clé = sentence
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            valeurs = [**sentence**, literature, style, art, decoration, figures, plan]
+                        </td>
+                        <td>
+                            valeurs = [句, 刑, 処, **文**]
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </script>
         </section>
 
@@ -310,12 +328,13 @@ new Thread(new Runnable() {
                 Sucre syntaxique. Soit le code suivant :
 
                 <pre><code class="java" data-trim contenteditable>
-Function&lt;String,String> toUpper = new Function&lt;String,String>(){
-    @Override
-    public String apply(String source) {
+UnaryOperator&lt;String> toUpper =
+    new UnaryOperator&lt;String>(){
+        @Override
+        public String apply(String source) {
         return source.toUpperCase();
-    }
-};
+        }
+    };
                 </code></pre>
 
                 <div class="fragment">
@@ -335,6 +354,14 @@ Function&lt;String, String> toUpper =
 Function&lt;String, String> toUpper = String::toUpperCase;
                 </code></pre>
                 </div>
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Live coding
+
+                ### Parallèle avec Guava
             </script>
         </section>
 
