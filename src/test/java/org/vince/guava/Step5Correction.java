@@ -17,9 +17,6 @@ import java.util.Iterator;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * Created by vincent on 06/10/15.
- */
 public class Step5Correction {
 
     @Test
@@ -31,7 +28,7 @@ public class Step5Correction {
 
         assertEquals(6355, kanjiDic.getKanji().size());
 
-        ImmutableMap<String, Collection<EnglishWord>> index = FluentIterable.from(kanjiDic.getKanji())
+        ImmutableListMultimap<String, EnglishWord> multimap = FluentIterable.from(kanjiDic.getKanji())
             .filter(new Predicate<Kanji>() {
                 @Override
                 public boolean apply(Kanji kanji) {
@@ -54,15 +51,15 @@ public class Step5Correction {
                 public String apply(EnglishWord englishWord) {
                     return englishWord.getMeaning();
                 }
-            }).asMap();
+            });
 
         // Cas de test "car"
-        Collection<EnglishWord> carResult = index.get("car");
+        Collection<EnglishWord> carResult = multimap.get("car");
         assertEquals(1, carResult.size());
         assertEquals("車", carResult.iterator().next().getKanji().getCharacter());
 
-        // Cas de test
-        Collection<EnglishWord> houseResult = index.get("house");
+        // Cas de test sur "house"
+        Collection<EnglishWord> houseResult = multimap.get("house");
 
         assertEquals(10, houseResult.size());
         assertEquals(
