@@ -26,6 +26,9 @@ public class Step1 {
         }
     }
 
+    /**
+     * Trie d'une collection en Java
+     */
     @Test
     public void testComparator() {
         List<User> users = Arrays.asList(

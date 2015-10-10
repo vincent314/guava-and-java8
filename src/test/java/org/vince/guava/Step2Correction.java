@@ -4,9 +4,6 @@ import com.google.common.base.Function;
 import org.junit.Assert;
 import org.junit.Test;
 
-/**
- * Created by vincent on 02/10/15.
- */
 public class Step2Correction {
     @Test
     public void testFunction(){
@@ -14,6 +11,7 @@ public class Step2Correction {
             1,2,3
         };
 
+        // Utilisation de l'interface usuelle Function du Guava
         Function<Integer, Integer> doubleFunc = new Function<Integer, Integer>() {
 
             @Override

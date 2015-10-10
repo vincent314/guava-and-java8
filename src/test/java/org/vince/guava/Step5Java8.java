@@ -1,8 +1,8 @@
 package org.vince.guava;
 
+import org.junit.Rule;
 import org.junit.Test;
 import org.vince.guava.mm.EnglishWord;
-import org.vince.guava.mm.Kanji;
 import org.vince.guava.mm.KanjiDic;
 
 import javax.xml.bind.JAXB;
@@ -15,8 +15,14 @@ import static org.junit.Assert.assertEquals;
 
 public class Step5Java8 {
 
+    @Rule
+    public StopWatchRule stopWatch = new StopWatchRule();
+
     @Test
     public void testKanji() {
+
+        // -------------------- GIVEN -------------------------------
+        // Lecture du dictionnaire
         KanjiDic kanjiDic = JAXB.unmarshal(
             this.getClass().getClassLoader().getResourceAsStream("kanji.xml"),
             KanjiDic.class
@@ -24,26 +30,27 @@ public class Step5Java8 {
 
         assertEquals(6355, kanjiDic.getKanji().size());
 
-        List<Kanji> list = kanjiDic.getKanji().stream().filter((kanji -> "文".equals(kanji.getCharacter()))).collect(Collectors.toList());
-
+        // --------------------- THEN --------------------------
         // Indexer Kanji --> sens
-        Map<String, List<EnglishWord>> index = kanjiDic.getKanji()
-            .stream()
+        Map<String, List<EnglishWord>> EnglishDic = kanjiDic.getKanji()
+            .parallelStream()
             .filter((kanji -> kanji.getMeaning() != null))
             .flatMap(kanji -> kanji.getMeaning()
-                    .stream()
+                    .parallelStream()
                     .map(meaning -> new EnglishWord(kanji, meaning.getValue()))
             ).collect(
                 Collectors.groupingBy(EnglishWord::getMeaning)
             );
 
+
+        // ------------------------ EXPECT --------------------------
         // Cas de test "car"
-        Collection<EnglishWord> carResult = index.get("car");
+        Collection<EnglishWord> carResult = EnglishDic.get("car");
         assertEquals(1, carResult.size());
         assertEquals("車", carResult.iterator().next().getKanji().getCharacter());
 
         // Cas de test sur "house"
-        Collection<EnglishWord> houseResult = index.get("house");
+        Collection<EnglishWord> houseResult = EnglishDic.get("house");
 
         assertEquals(10, houseResult.size());
         assertEquals(

@@ -10,14 +10,17 @@ public class Step2 {
     }
 
     /**
-     * Utiliser l'interface générique Function
+     * Créer et utiliser une interface pour customiser un traitement
      */
     @Test
     public void testCustomInterface(){
+        // -------------------- GIVEN -------------------------------
         int[] values = {
             1,2,3
         };
 
+        // --------------------- THEN --------------------------
+        // Implémentation du traitement personnalisé
         CustomInterface traitement = new CustomInterface() {
             @Override
             public int traiter(int value) {
@@ -29,6 +32,7 @@ public class Step2 {
             values[i] = traitement.traiter(values[i]);
         }
 
+        // -------------- EXPECT -------------------
         Assert.assertArrayEquals(new int[]{2, 4, 6}, values);
     }
 

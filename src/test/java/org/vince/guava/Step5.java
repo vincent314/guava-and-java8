@@ -1,5 +1,6 @@
 package org.vince.guava;
 
+import org.junit.Rule;
 import org.junit.Test;
 import org.vince.guava.mm.EnglishWord;
 import org.vince.guava.mm.Kanji;
@@ -14,13 +15,15 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * Created by vincent on 06/10/15.
- */
 public class Step5 {
+
+    @Rule
+    public StopWatchRule stopWatch = new StopWatchRule();
 
     @Test
     public void testKanji() {
+        // -------------------- GIVEN -------------------------------
+        // Lecture du dictionnaire
         KanjiDic kanjiDic = JAXB.unmarshal(
             this.getClass().getClassLoader().getResourceAsStream("kanji.xml"),
             KanjiDic.class
@@ -28,29 +31,32 @@ public class Step5 {
 
         assertEquals(6355,kanjiDic.getKanji().size());
 
-        HashMap<String, List<EnglishWord>> index = new HashMap<String, List<EnglishWord>>();
+        // --------------------- THEN --------------------------
+        // Indexer Kanji --> sens
+        HashMap<String, List<EnglishWord>> englishDic = new HashMap<String, List<EnglishWord>>();
 
         // Indexer dans un Map un Character Kanji avec la liste de ses sens
         for (Kanji kanji : kanjiDic.getKanji()) {
             if(kanji.getMeaning() == null) continue;
 
             for (Meaning meaning : kanji.getMeaning()) {
-                List<EnglishWord> meanings = index.get(meaning.getValue());
+                List<EnglishWord> meanings = englishDic.get(meaning.getValue());
                 if (meanings == null) {
                     meanings = new ArrayList<EnglishWord>();
-                    index.put(meaning.getValue(), meanings);
+                    englishDic.put(meaning.getValue(), meanings);
                 }
                 meanings.add(new EnglishWord(kanji, meaning.getValue()));
             }
         }
 
+        // ------------------------ EXPECT --------------------------
         // Cas de test "car"
-        List<EnglishWord> carResult = index.get("car");
+        List<EnglishWord> carResult = englishDic.get("car");
         assertEquals(1, carResult.size());
         assertEquals("車", carResult.get(0).getKanji().getCharacter());
 
         // Cas de test sur "house"
-        Collection<EnglishWord> houseResult = index.get("house");
+        Collection<EnglishWord> houseResult = englishDic.get("house");
         StringBuilder buffer = new StringBuilder();
         boolean isFirst = true;
         for (EnglishWord englishWord : houseResult) {

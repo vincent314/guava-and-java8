@@ -1,9 +1,6 @@
 package org.vince.guava;
 
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -11,17 +8,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Created by vincent on 03/10/15.
- */
 public class Step3 {
     /**
-     * Filtrer les nombres pairs
+     * Test du filtre les nombres pairs
      */
     @Test
     public void testFilter() {
+        // ------------- GIVEN ---------------
         List<Integer> values = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
+        // --------------- THEN --------------
         // Conserver les nombres pairs
         List<Integer> result = new ArrayList<Integer>();
         for (Integer value : values) {
@@ -30,6 +26,7 @@ public class Step3 {
             }
         }
 
+        // ------------- EXPECT ----------------
         Assert.assertTrue(
             Iterables.elementsEqual(
                 Arrays.asList(2, 4, 6, 8, 10),
@@ -51,17 +48,20 @@ public class Step3 {
     }
 
     /**
-     * Convertir une classe en une autre
+     * Convertir une classe en une autre (String -> User)
      */
     @Test
     public void testTransform() {
+        // ------------- GIVEN ---------------
         List<String> values = Arrays.asList("Ghislaine", "Catherine");
 
+        // --------------- THEN --------------
         List<User> result = new ArrayList<User>();
         for (String value : values) {
             result.add(new User(value));
         }
 
+        // ------------- EXPECT ----------------
         Assert.assertTrue(
             Iterables.elementsEqual(
                 Arrays.asList(
@@ -77,8 +77,10 @@ public class Step3 {
      */
     @Test
     public void testChain(){
+        // ------------- GIVEN ---------------
         Integer[] values = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
+        // --------------- THEN --------------
         // Conserver les nombres pairs
         List<Integer> step1 = new ArrayList<Integer>();
         for (Integer value : values) {
@@ -87,6 +89,7 @@ public class Step3 {
             }
         }
 
+        // ------------- EXPECT ----------------
         StringBuilder stringBuilder = new StringBuilder();
         boolean isFirst = true;
         for (Integer integer : step1) {

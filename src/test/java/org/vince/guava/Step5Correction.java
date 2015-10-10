@@ -3,7 +3,10 @@ package org.vince.guava;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
-import com.google.common.collect.*;
+import com.google.common.collect.FluentIterable;
+import com.google.common.collect.ImmutableListMultimap;
+import com.google.common.collect.Iterables;
+import org.junit.Rule;
 import org.junit.Test;
 import org.vince.guava.mm.EnglishWord;
 import org.vince.guava.mm.Kanji;
@@ -11,16 +14,19 @@ import org.vince.guava.mm.KanjiDic;
 import org.vince.guava.mm.Meaning;
 
 import javax.xml.bind.JAXB;
-
 import java.util.Collection;
-import java.util.Iterator;
 
 import static org.junit.Assert.assertEquals;
 
 public class Step5Correction {
 
+    @Rule
+    public StopWatchRule stopWatch = new StopWatchRule();
+
     @Test
     public void testKanji() {
+        // -------------------- GIVEN -------------------------------
+        // Lecture du dictionnaire
         KanjiDic kanjiDic = JAXB.unmarshal(
             this.getClass().getClassLoader().getResourceAsStream("kanji.xml"),
             KanjiDic.class
@@ -28,7 +34,10 @@ public class Step5Correction {
 
         assertEquals(6355, kanjiDic.getKanji().size());
 
-        ImmutableListMultimap<String, EnglishWord> multimap = FluentIterable.from(kanjiDic.getKanji())
+        // --------------------- THEN --------------------------
+        // Indexer Kanji --> sens
+        ImmutableListMultimap<String, EnglishWord> englishDic = FluentIterable
+            .from(kanjiDic.getKanji())
             .filter(new Predicate<Kanji>() {
                 @Override
                 public boolean apply(Kanji kanji) {
@@ -38,12 +47,14 @@ public class Step5Correction {
             .transformAndConcat(new Function<Kanji, Iterable<EnglishWord>>() {
                 @Override
                 public Iterable<EnglishWord> apply(Kanji kanji) {
-                    return Iterables.transform(kanji.getMeaning(), new Function<Meaning, EnglishWord>() {
-                        @Override
-                        public EnglishWord apply(Meaning meaning) {
-                            return new EnglishWord(kanji, meaning.getValue());
-                        }
-                    });
+                    return Iterables.transform(
+                        kanji.getMeaning(),
+                        new Function<Meaning, EnglishWord>() {
+                            @Override
+                            public EnglishWord apply(Meaning meaning) {
+                                return new EnglishWord(kanji, meaning.getValue());
+                            }
+                        });
                 }
             })
             .index(new Function<EnglishWord, String>() {
@@ -53,13 +64,14 @@ public class Step5Correction {
                 }
             });
 
+        // ------------------------ EXPECT --------------------------
         // Cas de test "car"
-        Collection<EnglishWord> carResult = multimap.get("car");
+        Collection<EnglishWord> carResult = englishDic.get("car");
         assertEquals(1, carResult.size());
         assertEquals("車", carResult.iterator().next().getKanji().getCharacter());
 
         // Cas de test sur "house"
-        Collection<EnglishWord> houseResult = multimap.get("house");
+        Collection<EnglishWord> houseResult = englishDic.get("house");
 
         assertEquals(10, houseResult.size());
         assertEquals(
