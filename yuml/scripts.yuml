@@ -3,16 +3,16 @@
 [Kanji]1..*-0..*[Meaning]
 
 // XML : Kanji -> English
-[KanjiDic]++-0..*>[Kanji]
-[Kanji]++-0..*>[Meaning]
+[KanjiDic]++-0..*>[Kanji|character:String]
+[Kanji]++-0..*>[Meaning|value:String]
 [KanjiDic]-[note:Dictionnaire Kanji-Anglais (fichier source XML){bg:wheat}]
 
 // Target : English -> Kanji
-[EnglishDic]++-0..*>[Meaning]
-[Meaning]++-0..*>[Kanji]
+[EnglishDic]++-0..*>[Meaning|value:String]
+[Meaning]++-0..*>[Kanji|character:String]
 [EnglishDic]-[note:Dictionnaire Anglais-Kanji{bg:wheat}]
 
 // Target : implémentation
-[EnglishDic]++-0..*>[EnglishWord{bg:red}]
-[EnglishWord{bg:red}]++-0..*>[Kanji]
+[EnglishDic]++-0..*>[EnglishWord|meaning:String{bg:red}]
+[EnglishWord]++-0..*>[Kanji]
 [EnglishDic]-[note:Dictionnaire Anglais-Kanji{bg:wheat}]

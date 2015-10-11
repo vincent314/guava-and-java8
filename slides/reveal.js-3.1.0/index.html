@@ -16,10 +16,16 @@
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
     <link rel="stylesheet" href="css/reveal.css">
-    <link rel="stylesheet" href="css/theme/black.css" id="theme">
+    <link rel="stylesheet" href="css/theme/moon.css" id="theme">
 
     <!-- Code syntax highlighting -->
     <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <style>
+        .reveal section img {
+            background-color: white;
+        }
+    </style>
 
     <!-- Printing and PDF exports -->
     <script>
@@ -122,6 +128,14 @@ new Thread(new Runnable() {
 
         <section data-markdown>
             <script type="text/template">
+                ## Exemple
+
+                Trier une collection
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
                 ## Pourquoi utiliser Guava dès maintenant ?
 
                 <ul>
@@ -174,8 +188,6 @@ new Thread(new Runnable() {
                 ## Live coding : Transformers
 
                 Exemple : Transformer des objets en d'autres objets
-
-                <img src="img/transformers.gif"/>
             </script>
         </section>
 
@@ -216,18 +228,18 @@ new Thread(new Runnable() {
                     </tr>
                     <tr>
                         <td>
-                            clé = 文
+                            clé = '文'
                         </td>
                         <td>
-                            clé = sentence
+                            clé = 'sentence'
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            valeurs = [**sentence**, literature, style, art, decoration, figures, plan]
+                            valeurs = ['**sentence**', 'literature', 'style', 'art', 'decoration', 'figures', 'plan']
                         </td>
                         <td>
-                            valeurs = [句, 刑, 処, **文**]
+                            valeurs = ['句', '刑', '処', '**文**']
                         </td>
                     </tr>
                     </tbody>
@@ -298,7 +310,7 @@ new Thread(new Runnable() {
 
                 ~43 interfaces annotées **@FunctionalInterface**
 
-                1 méthode par interface (non «default»)
+                1 seule méthode abstraite par interface (non «default»)
 
                 possibilité de définir ses propres interfaces fonctionnelles
 
